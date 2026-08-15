@@ -1,0 +1,102 @@
+{
+  "target": "google.com",
+  "resolved_ip": "142.250.191.46",
+  "total_hops": 8,
+  "avg_latency": 15.2,
+  "max_latency": 18.1,
+  "min_latency": 10.5,
+  "packet_loss": 0.0,
+  "countries": ["US"],
+  "cloud_providers": ["Google Cloud"],
+  "health_score": 95,
+  "health_rating": "\u2605\u2605\u2605\u2605\u2605",
+  "duration_ms": 2500,
+  "timestamp": "2023-10-25T12:00:00",
+  "hops": [
+    {
+      "hop_number": 1,
+      "ip": "103.21.244.1",
+      "hostname": "gateway.delhi.isp.in",
+      "rtts": [2.2, 2.1, 2.5],
+      "avg_rtt": 2.3,
+      "min_rtt": 2.1,
+      "max_rtt": 2.5,
+      "is_timeout": false,
+      "is_destination": false,
+      "packet_loss": 0.0,
+      "geo": {"country": "India", "country_code": "IN", "city": "New Delhi", "latitude": 28.6139, "longitude": 77.2090},
+      "network": {"isp": "Airtel Broadband"},
+      "cloud": null
+    },
+    {
+      "hop_number": 2,
+      "ip": "195.66.224.1",
+      "hostname": "linx-exchange.london.uk",
+      "rtts": [65.2, 64.5, 65.1],
+      "avg_rtt": 64.9,
+      "min_rtt": 64.5,
+      "max_rtt": 65.2,
+      "is_timeout": false,
+      "is_destination": false,
+      "packet_loss": 0.0,
+      "geo": {"country": "United Kingdom", "country_code": "GB", "city": "London", "latitude": 51.5074, "longitude": -0.1278},
+      "network": {"isp": "LINX IXP"},
+      "cloud": null
+    },
+    {
+      "hop_number": 3,
+      "ip": "142.250.191.46",
+      "hostname": "lga34s32-in-f14.1e100.net",
+      "rtts": [120.2, 119.5, 121.1],
+      "avg_rtt": 120.2,
+      "min_rtt": 119.5,
+      "max_rtt": 121.1,
+      "is_timeout": false,
+      "is_destination": true,
+      "packet_loss": 0.0,
+      "geo": {"country": "United States", "country_code": "US", "city": "New York", "latitude": 40.7128, "longitude": -74.0060},
+      "network": {"asn": 15169, "isp": "Google LLC"},
+      "cloud": {"provider": "Google Cloud", "region": "us-east"}
+    }
+  ],
+  "connection": {
+    "dns_ms": 12.0,
+    "tcp_ms": 14.5,
+    "tls_ms": 25.0,
+    "ttfb_ms": 45.0,
+    "total_ms": 96.5,
+    "dns_server": "System DNS",
+    "tls_version": "TLSv1.3",
+    "certificate_valid": true,
+    "certificate_expiry": "2024-10-25"
+  },
+  "dns_results": [
+    {
+      "server_name": "System DNS",
+      "server_ip": "192.168.1.1",
+      "resolved_ip": "142.250.191.46",
+      "response_time_ms": 12.0,
+      "is_match": true
+    },
+    {
+      "server_name": "Google DNS",
+      "server_ip": "8.8.8.8",
+      "resolved_ip": "142.250.191.46",
+      "response_time_ms": 15.0,
+      "is_match": true
+    }
+  ],
+  "bandwidth": {
+    "download_mbps": 125.5,
+    "upload_mbps": 0.0,
+    "test_server": "Google",
+    "test_duration_ms": 1500
+  },
+  "diagnosis": {
+    "root_cause": "No issues detected",
+    "description": "Connection to google.com is healthy. Average latency is 15ms with 0% packet loss across 8 hops.",
+    "severity": "info",
+    "bottlenecks": [],
+    "recommendations": []
+  }
+}

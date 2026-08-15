@@ -1,0 +1,231 @@
+/* ── Cyberpunk Dark Theme for NetScope ── */
+
+* {
+    color: #e0e6ed;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+QMainWindow, QDialog, QWidget {
+    background-color: #0a0a1a;
+}
+
+/* ── Typography ── */
+QLabel#sidebarTitle {
+    color: #00ffcc;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-top: 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #1a2040;
+}
+
+QLabel#fieldLabel {
+    color: #7a8aac;
+    font-size: 12px;
+    font-weight: bold;
+    padding-top: 8px;
+}
+
+QLabel#fieldValue {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+QLabel#healthScore {
+    font-family: "Consolas", monospace;
+    margin-top: 8px;
+}
+
+QLabel#healthRating {
+    color: #ffbb00;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+QLabel#connLabel {
+    color: #9aaabc;
+    font-size: 13px;
+}
+
+QLabel#connValue {
+    font-family: "Consolas", monospace;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+QLabel#hopDetailText {
+    font-family: "Consolas", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    background-color: #06060c;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #1a2040;
+}
+
+QLabel#diagnosisContent {
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #06060c;
+    padding: 14px;
+    border-radius: 4px;
+    border: 1px solid #1a2040;
+}
+
+
+/* ── Inputs & Buttons ── */
+QLineEdit#searchInput {
+    background-color: #151a3a;
+    border: 1px solid #2a3060;
+    border-radius: 6px;
+    padding: 0 16px;
+    color: #ffffff;
+    font-size: 15px;
+    selection-background-color: #00ffcc;
+    selection-color: #000000;
+}
+
+QLineEdit#searchInput:focus {
+    border: 1px solid #00ffcc;
+    background-color: #1a204a;
+}
+
+QPushButton#traceButton {
+    background-color: #00ffcc;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 20px;
+}
+
+QPushButton#traceButton:hover {
+    background-color: #33ffdb;
+}
+
+QPushButton#traceButton:pressed {
+    background-color: #00ccaa;
+}
+
+QPushButton#cancelButton {
+    background-color: #ff4444;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 20px;
+}
+
+QPushButton#cancelButton:hover {
+    background-color: #ff6666;
+}
+
+/* ── Docks & Panels ── */
+QDockWidget {
+    titlebar-close-icon: url(close.png);
+    titlebar-normal-icon: url(float.png);
+    border: 1px solid #1a2040;
+}
+
+QDockWidget::title {
+    background: #0f1225;
+    text-align: left;
+    padding-left: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: #8a9abc;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+QScrollArea, QScrollArea > QWidget > QWidget {
+    background-color: transparent;
+    border: none;
+}
+
+/* ── Cards ── */
+QWidget#cardPanel {
+    background-color: #10142b;
+    border-radius: 8px;
+    border: 1px solid #1a2040;
+}
+
+/* ── Tabs ── */
+QTabWidget::pane {
+    border: 1px solid #1a2040;
+    background: #0a0a1a;
+}
+
+QTabBar::tab {
+    background: #0f1225;
+    color: #8a9abc;
+    padding: 8px 16px;
+    border: 1px solid #1a2040;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-right: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: #151a3a;
+    color: #00ffcc;
+}
+
+QTabBar::tab:selected {
+    border-top: 2px solid #00ffcc;
+}
+
+/* ── Lists ── */
+QListWidget {
+    background-color: #06060c;
+    border: 1px solid #1a2040;
+    border-radius: 4px;
+    outline: none;
+}
+
+QListWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #0f1225;
+}
+
+QListWidget::item:hover {
+    background-color: #151a3a;
+}
+
+QListWidget::item:selected {
+    background-color: #1a204a;
+    color: #00ffcc;
+    border-left: 3px solid #00ffcc;
+}
+
+/* ── Progress Bar ── */
+QProgressBar {
+    background-color: #151a3a;
+    border-radius: 4px;
+    border: none;
+}
+
+QProgressBar::chunk {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #00ccff, stop:1 #00ffcc);
+    border-radius: 4px;
+}
+
+/* ── Status Bar ── */
+QStatusBar {
+    background-color: #0f1225;
+    color: #8a9abc;
+    border-top: 1px solid #1a2040;
+}
+
+QLabel#statusLabel {
+    padding: 0 10px;
+    font-family: "Consolas", monospace;
+}
