@@ -1,7 +1,8 @@
 <div align="center">
 
 # 🌐 NetScope
-C:\netscope\0815.mp4
+
+https://github.com/user-attachments/assets/66bd2077-5577-4d05-af64-be242bebdb23
 
 ### Network Diagnostic & Intelligence Platform
 
