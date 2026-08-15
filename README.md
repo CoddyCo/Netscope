@@ -255,66 +255,6 @@ cd engine/build
 ctest --output-on-failure
 ```
 
----
-
-## 🔬 How It Works — Interview Deep Dive
-
-<details>
-<summary><b>🔸 "How does the traceroute engine achieve sub-300ms performance?"</b></summary>
-
-Standard traceroute sends one probe, waits for the response, then sends the next — making it $O(N)$ where N is the number of hops. NetScope's C++ engine uses a **sliding-window burst strategy**: it fires probes for TTLs 1 through 30 simultaneously using raw sockets, then multiplexes incoming ICMP Time Exceeded responses back to their originating TTL via sequence number mapping. This converts the operation from sequential to effectively $O(1)$ wall-clock time.
-
-**Key files:** [`engine/src/traceroute.cpp`](engine/src/traceroute.cpp), [`engine/include/netscope/traceroute.hpp`](engine/include/netscope/traceroute.hpp)
-</details>
-
-<details>
-<summary><b>🔸 "How do you prevent the GUI from freezing during network operations?"</b></summary>
-
-The `TraceController` inherits from `QThread`. All blocking operations (C++ engine calls, DNS lookups, GeoIP resolution, AWS queries) execute on a background thread. Results are delivered to the main thread via Qt's `pyqtSignal` mechanism, which is thread-safe and non-blocking. The GUI maintains 60 FPS rendering at all times, even during 30-hop traces with full enrichment.
-
-**Key file:** [`netscope/core/trace_controller.py`](netscope/core/trace_controller.py)
-</details>
-
-<details>
-<summary><b>🔸 "How does the auto-diagnosis avoid false positives from ICMP rate limiting?"</b></summary>
-
-Internet backbone routers aggressively deprioritize ICMP TTL-exceeded packets to protect their control plane. This makes hops *appear* to have 100% packet loss or 500ms+ latency when the data plane is perfectly healthy. NetScope implements a **look-ahead heuristic**: if hop $H[i]$ shows high loss/latency but $H[i+1]$ recovers to normal, $H[i]$ is classified as "Rate Limited" rather than a true bottleneck. This single heuristic eliminates the most common class of traceroute misinterpretation.
-
-**Key file:** [`netscope/core/auto_diagnosis.py`](netscope/core/auto_diagnosis.py)
-</details>
-
-<details>
-<summary><b>🔸 "Why did you use a Radix Trie for cloud detection instead of a hash map?"</b></summary>
-
-Cloud providers publish their IP ranges as CIDR blocks (e.g., `52.94.0.0/16`). A hash map would require expanding every CIDR block into individual IPs — consuming gigabytes of memory. A Radix Trie stores CIDR prefixes directly as tree paths, achieving $O(1)$ lookup time (bounded by the 32-bit IPv4 address length) with minimal memory overhead. The trie loads 10,000+ AWS, GCP, and Cloudflare CIDR blocks in milliseconds at startup.
-
-**Key files:** [`engine/src/cidr_trie.cpp`](engine/src/cidr_trie.cpp), [`engine/include/netscope/cidr_trie.hpp`](engine/include/netscope/cidr_trie.hpp)
-</details>
-
-<details>
-<summary><b>🔸 "How does the connection profiler decompose latency into phases?"</b></summary>
-
-The profiler opens a raw TCP socket and measures each phase independently using `time.perf_counter()` (nanosecond precision):
-1. **DNS** — `socket.gethostbyname()` timing
-2. **TCP** — Time between `connect()` call and established connection
-3. **TLS** — `ssl.wrap_socket()` negotiation time (also extracts TLS version)
-4. **TTFB** — Time from sending an HTTP GET to receiving the first byte
-
-This tells you *exactly* which layer is slow — DNS misconfiguration, distant server, slow TLS negotiation, or backend processing delay.
-
-**Key file:** [`netscope/core/connection_profiler.py`](netscope/core/connection_profiler.py)
-</details>
-
-<details>
-<summary><b>🔸 "Why a dual SQLite + DynamoDB architecture?"</b></summary>
-
-**SQLite** provides zero-latency local persistence for the "Recent Searches" panel and offline usage — it loads in microseconds and requires no network. **DynamoDB** provides cross-session historical baselines: when you trace `google.com` today, NetScope queries DynamoDB for all past traces to that target, calculates the historical average latency, and overlays it as a dashed baseline on the chart. This lets engineers instantly see "this route is 40% slower than usual" — something impossible with local-only storage across reinstalls or devices.
-
-**Key files:** [`netscope/core/database.py`](netscope/core/database.py), [`netscope/core/dynamodb_client.py`](netscope/core/dynamodb_client.py)
-</details>
-
----
-
 ## 👤 Author
 
 **Mohd Mursaleen**
