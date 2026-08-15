@@ -2,7 +2,7 @@ import os
 import sqlite3
 import pytest
 from netscope.core.database import NetScopeDB
-from netscope.core.models import TraceSummary, Hop
+from netscope.core.models import TraceSummary, Hop, HealthScore
 
 @pytest.fixture
 def db(tmp_path):
@@ -24,8 +24,7 @@ def test_save_and_retrieve_trace(db):
         packet_loss=0.0,
         countries=["US"],
         cloud_providers=["Google Cloud"],
-        health_score=95,
-        health_rating="★★★★★",
+        health=HealthScore(score=95, rating="★★★★★"),
         duration_ms=1500,
         timestamp="2023-10-25T10:00:00",
         hops=[],
